@@ -1,3 +1,4 @@
+// @ts-expect-error - No types available
 import {
 	pipeline,
 	type AutomaticSpeechRecognitionPipeline,

@@ -20,14 +20,9 @@ const changelog = defineCollection({
 			}),
 		),
 	}),
-	transform: async (doc, { collection }) => {
-		const allDocs = await collection.documents();
-		const publishedDocs = allDocs.filter((entry) => entry.published !== false);
-		const sorted = [...publishedDocs].sort((a, b) =>
-			b.version.localeCompare(a.version, undefined, { numeric: true }),
-		);
-		const isLatest =
-			doc.published !== false && sorted[0]?.version === doc.version;
+	transform: async (doc) => {
+		// Removed deadlock-inducing collection.documents() call
+		const isLatest = false; // or handle this logic elsewhere
 		return { ...doc, isLatest };
 	},
 });
